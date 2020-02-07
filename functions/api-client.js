@@ -10,12 +10,20 @@ module.exports = class ApiClient {
   }
 
   async getPulls () {
-    return await axios.get(`${BASE_URL}/repos/${this.owner}/${this.repo}/pulls?access_token=${this.token}`)
+    return await axios.get(`${BASE_URL}/repos/${this.owner}/${this.repo}/pulls`, {
+      headers: {
+        Authorization: `token ${this.token}`,
+      }
+    })
   }
 
   async mergePulls (numbers) {
     await Promise.all(numbers.map(number => {
-      return axios.put(`${BASE_URL}/repos/${this.owner}/${this.repo}/pulls/${number}/merge?access_token=${this.token}`)
+      return axios.put(`${BASE_URL}/repos/${this.owner}/${this.repo}/pulls/${number}/merge`, {
+        headers: {
+          Authorization: `token ${this.token}`,
+        }
+      })
     }))
   }
 }
