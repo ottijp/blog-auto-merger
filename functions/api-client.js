@@ -19,7 +19,7 @@ module.exports = class ApiClient {
 
   async mergePulls (numbers) {
     await Promise.all(numbers.map(number => {
-      return axios.put(`${BASE_URL}/repos/${this.owner}/${this.repo}/pulls/${number}/merge`, {
+      return axios.put(`${BASE_URL}/repos/${this.owner}/${this.repo}/pulls/${number}/merge`, {}, {
         headers: {
           Authorization: `token ${this.token}`,
         }
